@@ -16,7 +16,7 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  IMAGE_NAME: dsjhartmann/techdays
+  IMAGE_NAME: dsjhartmann/simple-spring-app
 
 
 jobs:
