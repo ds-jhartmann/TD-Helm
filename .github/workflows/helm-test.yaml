@@ -59,15 +59,11 @@ jobs:
         with:
           node_image: ${{ github.event.inputs.node_image }}
 
-      - name: Set up Docker Buildx
-        #        if: steps.list-changed.outputs.changed == 'true'
-        uses: docker/setup-buildx-action@v3
-
       - name: Build image
         uses: docker/build-push-action@v5
         #        if: steps.list-changed.outputs.changed == 'true'
         with:
-          context: .
+          context: simple-spring-app/
           push: true
           tags: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
 
