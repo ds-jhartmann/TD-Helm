@@ -14,6 +14,12 @@ on:
 
 jobs:
   lint-test:
+    env:
+      REGISTRY: kind-registry:5000
+      IMAGE_NAME: simple-spring-app
+      IMAGE_TAG: testing
+      CHART_DIR: charts/simple-spring-app
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -56,9 +62,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: kind-registry:5000/simple-spring-app:testing
+          tags: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
 
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
         run: |
-          ct install --charts charts/simple-spring-app --helm-extra-set-args "--set=image.tag=testing --set=image.repository=kind-registry:5000/simple-spring-app"
+          ct install --charts ${{ env.CHART_DIR }} --helm-extra-set-args "--set=image.tag=${{ env.IMAGE_TAG }} --set=image.repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
