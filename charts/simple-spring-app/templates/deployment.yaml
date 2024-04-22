@@ -46,10 +46,13 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: {{ tpl .Values.app.postgres.jdbcurl . }}
+            - name: SPRING_DATASOURCE_USERNAME
+              value: {{ tpl .Values.app.postgres.username . }}
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: {{ tpl .Values.app.postgres.password . }}
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

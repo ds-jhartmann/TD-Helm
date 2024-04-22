@@ -59,17 +59,13 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources:
+   limits:
+     cpu: 500m
+     memory: 0.5Gi
+   requests:
+     cpu: 500m
+     memory: 0.5Gi
 
 livenessProbe:
   httpGet:
@@ -97,21 +93,20 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+app:
+  postgres:
+    jdbcurl: "jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/test"
+    username: "test"
+    password: "test"
 
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+postgresql:
+  global:
+    postgresql:
+      auth:
+        username: "test"
+        password: "test"
+        database: "test"
+  primary:
+    persistence:
+      enabled: false
+      size: 1Gi
