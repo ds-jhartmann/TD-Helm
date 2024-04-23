@@ -5,8 +5,11 @@ on:
     paths:
       - 'charts/**'
   push:
+    branches:
+      - 'main'
     paths:
       - 'charts/**'
+      - '.github/workflows/helm-test.yaml'
   workflow_dispatch:
     inputs:
       node_image:
@@ -43,7 +46,7 @@ jobs:
         uses: helm/chart-testing-action@v2
 
       - name: Kubernetes KinD Cluster
-        uses: helm/kind-action@v1.8.0
+        uses: helm/kind-action@v1
         with:
           node_image: ${{ github.event.inputs.node_image || 'kindest/node:v1.29.2' }}
           version: v0.20.0
