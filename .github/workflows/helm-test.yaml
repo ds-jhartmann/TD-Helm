@@ -45,10 +45,8 @@ jobs:
       - name: Kubernetes KinD Cluster
         uses: helm/kind-action@v1.8.0
         with:
-          node_image: ${{ github.event.inputs.node_image }}
+          node_image: ${{ github.event.inputs.node_image || 'kindest/node:v1.29.2' }}
           version: v0.20.0
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Run chart-testing (lint)
         run: ct lint --target-branch ${{ github.event.repository.default_branch }}
