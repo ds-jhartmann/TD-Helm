@@ -31,7 +31,7 @@ podLabels: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext: {}  # TODO add something
   # capabilities:
   #   drop:
   #   - ALL
