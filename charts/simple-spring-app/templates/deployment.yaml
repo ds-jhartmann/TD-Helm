@@ -46,6 +46,9 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           env:
             - name: SPRING_DATASOURCE_URL
               value: {{ tpl .Values.app.postgres.jdbcurl . }}
@@ -55,8 +58,8 @@ spec:
               value: {{ tpl .Values.app.postgres.password . }}
       {{- with .Values.volumes }}
       volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: tmp
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

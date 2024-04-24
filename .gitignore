@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/charts/simple-spring-app/Chart.lock
+/charts/simple-spring-app/charts/**
