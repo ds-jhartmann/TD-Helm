@@ -8,8 +8,13 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
+    - name: test
       image: busybox
-      command: ['wget']
-      args: ['{{ include "simple-spring-app.fullname" . }}:{{ .Values.service.port }}/hello']
+      command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          wget --header 'Content-Type: application/json' --post-data '{"name": "test"}' '{{ include "simple-spring-app.fullname" . }}:{{ .Values.service.port }}/add'
+          wget '{{ include "simple-spring-app.fullname" . }}:{{ .Values.service.port }}/all'
+          wget '{{ include "simple-spring-app.fullname" . }}:{{ .Values.service.port }}/1'
   restartPolicy: Never
