@@ -80,6 +80,7 @@ livenessProbe:
   periodSeconds: 5
   successThreshold: 1
   timeoutSeconds: 1
+
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
@@ -95,24 +96,27 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
 
 # Simple Spring App config
 app:
   postgres:
     jdbcurl: "jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/test"
-    username: "test"
-    password: "test"
+    username: &postgresuser "testuser"
+    existingSecret: &existingSecret test-secret
 
 # PostgreSQL config
 postgresql:
   global:
     postgresql:
       auth:
-        username: "test"
-        password: "test"
+        existingSecret: *existingSecret
+        username: *postgresuser
         database: "test"
+        secretKeys:
+          adminPasswordKey: postgresAdminPassword
+          userPasswordKey: postgresPassword
   primary:
     persistence:
       enabled: false

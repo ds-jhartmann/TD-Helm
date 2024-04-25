@@ -2,12 +2,6 @@ apiVersion: v2
 name: simple-spring-app
 description: |
   A Helm chart for Kubernetes
-  
-  Generate this document by 
-  
-  ```shell
-  running docker run --rm --volume "$(pwd):/helm-docs" jnorwood/helm-docs:latest
-  ```
 
 # A chart can be either an 'application' or a 'library' chart.
 #

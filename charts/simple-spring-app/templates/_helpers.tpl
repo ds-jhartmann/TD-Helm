@@ -60,3 +60,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Determine secret name.
+*/}}
+{{- define "simple-spring-app.secretName" -}}
+{{- if .Values.app.postgres.existingSecret -}}
+{{- .Values.app.postgres.existingSecret }}
+{{- else -}}
+{{- printf "%s-secret" (include "simple-spring-app.fullname" .) -}}
+{{- end -}}
+{{- end -}}

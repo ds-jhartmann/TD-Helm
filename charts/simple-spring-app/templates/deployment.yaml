@@ -53,9 +53,15 @@ spec:
             - name: SPRING_DATASOURCE_URL
               value: {{ tpl .Values.app.postgres.jdbcurl . }}
             - name: SPRING_DATASOURCE_USERNAME
-              value: {{ tpl .Values.app.postgres.username . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "simple-spring-app.secretName" . }}
+                  key: postgresUser
             - name: SPRING_DATASOURCE_PASSWORD
-              value: {{ tpl .Values.app.postgres.password . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "simple-spring-app.secretName" . }}
+                  key: postgresPassword
       volumes:
         - name: tmp
           emptyDir: {}

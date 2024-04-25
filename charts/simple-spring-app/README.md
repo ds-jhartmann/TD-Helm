@@ -4,12 +4,6 @@
 
 A Helm chart for Kubernetes
 
-Generate this document by
-
-```shell
-running docker run --rm --volume "$(pwd):/helm-docs" jnorwood/helm-docs:latest
-```
-
 ## Requirements
 
 | Repository | Name | Version |
@@ -22,8 +16,7 @@ running docker run --rm --volume "$(pwd):/helm-docs" jnorwood/helm-docs:latest
 |-----|------|---------|-------------|
 | app.postgres.existingSecret | string | `"test-secret"` |  |
 | app.postgres.jdbcurl | string | `"jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/test"` |  |
-| app.postgres.password | string | `"test"` |  |
-| app.postgres.username | string | `"test"` |  |
+| app.postgres.username | string | `"testuser"` |  |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
@@ -53,8 +46,9 @@ running docker run --rm --volume "$(pwd):/helm-docs" jnorwood/helm-docs:latest
 | podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | The [pod security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) defines privilege and access control settings for a Pod within the deployment |
 | postgresql.global.postgresql.auth.database | string | `"test"` |  |
 | postgresql.global.postgresql.auth.existingSecret | string | `"test-secret"` |  |
-| postgresql.global.postgresql.auth.password | string | `"test"` |  |
-| postgresql.global.postgresql.auth.username | string | `"test"` |  |
+| postgresql.global.postgresql.auth.secretKeys.adminPasswordKey | string | `"postgresAdminPassword"` |  |
+| postgresql.global.postgresql.auth.secretKeys.userPasswordKey | string | `"postgresPassword"` |  |
+| postgresql.global.postgresql.auth.username | string | `"testuser"` |  |
 | postgresql.primary.persistence.enabled | bool | `false` |  |
 | postgresql.primary.persistence.size | string | `"1Gi"` |  |
 | readinessProbe.failureThreshold | int | `10` |  |
