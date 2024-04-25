@@ -51,17 +51,6 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
-*/}}
-{{- define "simple-spring-app.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "simple-spring-app.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
 Determine secret name.
 */}}
 {{- define "simple-spring-app.secretName" -}}
