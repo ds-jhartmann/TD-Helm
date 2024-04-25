@@ -56,7 +56,6 @@ spec:
               value: {{ tpl .Values.app.postgres.username . }}
             - name: SPRING_DATASOURCE_PASSWORD
               value: {{ tpl .Values.app.postgres.password . }}
-      {{- with .Values.volumes }}
       volumes:
         - name: tmp
           emptyDir: {}
