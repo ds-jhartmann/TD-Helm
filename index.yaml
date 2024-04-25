@@ -3,6 +3,20 @@ entries:
   simple-spring-app:
   - apiVersion: v2
     appVersion: 0.0.2
+    created: "2024-04-25T15:57:25.383959955Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.2.5
+    description: 'A Helm chart for Kubernetes '
+    digest: 60b3490d917e89d07419a2cdc3b156eb7a2e3f3d8b88930e431f7bcdc36a1439
+    name: simple-spring-app
+    type: application
+    urls:
+    - https://github.com/ds-jhartmann/TD-Helm/releases/download/simple-spring-app-0.0.3/simple-spring-app-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 0.0.2
     created: "2024-04-24T18:41:24.975509205Z"
     dependencies:
     - name: postgresql
@@ -31,4 +45,4 @@ entries:
     urls:
     - https://github.com/ds-jhartmann/TD-Helm/releases/download/simple-spring-app-0.0.1/simple-spring-app-0.0.1.tgz
     version: 0.0.1
-generated: "2024-04-24T18:41:24.975523381Z"
+generated: "2024-04-25T15:57:25.383974402Z"
