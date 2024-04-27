@@ -106,7 +106,7 @@ service:
 
 ## Ingress declaration to expose the network service.
 ingress:
-  enabled: false
+  enabled: true
   # -- Defines the [ingress class](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)  to use
   className: "nginx"
   # -- Additional ingress annotations to add
